@@ -1,0 +1,50 @@
+.divButton{
+	display:inline;
+	border-style:solid;
+	border-color:#bbb #888 #666 #aaa;
+	border-width:3px 4px 4px 3px;
+	width:9em;
+	height:2em;
+	background:#ccc;
+	color:#333;
+	line-height:2;
+	text-align:center;
+	text-decoration:none;
+	font-weight:900;
+}
+.divButton:hover{
+	border-color: #666 #aaa #bbb #888;
+	border-width:4px 3px 3px 4px;
+	color:#000;
+}
+
+.noteButton{
+    background:url(/assets/yud20.jpg) no-repeat;
+    cursor:pointer;
+    border:none;
+    width:20px;
+    height:auto;
+    object-fit:contain;
+    object-position:top 15%;
+}
+
+
+select.books, input,
+select.commentaries,    
+select.bibles,
+select.parallels,
+select.dictionaries,
+select.dailyword
+{
+    max-width: 100px;
+    min-width: 100px;
+    width: 100px !important;
+}
+
+input.info{
+width:80px;
+}
+select.chapters {
+width:50px;
+}
+

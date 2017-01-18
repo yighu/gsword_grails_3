@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>
+        <g:layoutTitle default="GSword"/>
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!--asset:stylesheet src="iBD.css"/-->
+    <asset:stylesheet src="application.css"/>
+    <asset:stylesheet src="sword.css"/>
+
+    <g:layoutHead/>
+</head>
+<body>
+
+    <div class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/#">
+                    <i class="fa grails-icon">
+                        <asset:image src="gswordlogo.png"/>
+                    </i>GSword 
+                </a>
+            </div>
+            <div class="navbar-collapse collapse" aria-expanded="false" style="height: 0.8px;">
+                <ul class="nav navbar-nav navbar-right">
+                    <g:pageProperty name="page.nav" />
+
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Classics<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="gbook/c">Classics</a></li>
+            </ul>
+        </li>
+ 	<g:render template="/_menu/bible" />
+	
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Daily Feed<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                    <li><a href="#">One Year Read/Pray Through Bible</a></li>
+                    <li><a href="#">Three Year Read/Pray Through Bible</a></li>
+                    <li><a href="#">Daily Bread</a></li>
+                    <li><a href="#">PrayScripture</a></li>
+                    <li><a href="#">In Closet</a></li>
+                    <li><a href="#">Prayers in the Bible</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">中文<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                    <li><a href="#">中文</a></li>
+                    <li><a href="#">English</a></li>
+            </ul>
+        </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <g:layoutBody/>
+
+    <div class="footer" role="contentinfo"></div>
+
+    <div id="spinner" class="spinner" style="display:none;">
+        <g:message code="spinner.alt" default="Loading&hellip;"/>
+    </div>
+
+    <asset:javascript src="application.js"/>
+
+</body>
+</html>
