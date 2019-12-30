@@ -10,7 +10,7 @@
 
 		</td>
         <td>
-          <a href="/gsword/help/help.xhtml" target="_blank"><g:message code="help" /></a>
+          <a href="/help/help.xhtml" target="_blank"><g:message code="help" /></a>
         </td>
 	</tr>
     <tr >
@@ -173,12 +173,12 @@
 
              <g:link action="language_change" params="[lang:'zh_CN']" title="click to use Chinese"><g:message code="locale.language.zh" /></g:link>
              <g:link action="language_change" params="[lang:'en_US']" title="click to use English"><g:message code="locale.language.en" /></g:link>
-           <a href="/gsword/help/ccimnews.pdf" target="_blank" title="Donation information"><g:message code="donation" /></a>
+           <a href="/help/ccimnews.pdf" target="_blank" title="Donation information"><g:message code="donation" /></a>
 
           </td>
-      <td><a href="http://www.facebook.com/group.php?gid=1714831533"><img src="/gsword/images/ipcn-fb.png" width="55" height="25" alt="facebook" title="facebook" border="0" /></a></td>
-      <td><a href="http://www.ccimweb.org/gsword/gbook/feed"><img border="0" src="/gsword/images/icon-rss.png" width="55" height="25" alt="rss" title="rss" /></a></td>
-      <td><a href="http://www.twitter.com/gsword"><img border="0" src="/gsword/images/icon-twitter.png" width="55" height="25" alt="twitter" title="twitter" /></a></td>
+      <td><a href="http://www.facebook.com/group.php?gid=1714831533"><img src="/images/ipcn-fb.png" width="55" height="25" alt="facebook" title="facebook" border="0" /></a></td>
+      <td><a href="http://www.ccimweb.org/gbook/feed"><img border="0" src="/images/icon-rss.png" width="55" height="25" alt="rss" title="rss" /></a></td>
+      <td><a href="http://www.twitter.com/gsword"><img border="0" src="/images/icon-twitter.png" width="55" height="25" alt="twitter" title="twitter" /></a></td>
       
 
 <!--td>

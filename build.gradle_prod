@@ -12,6 +12,7 @@ buildscript {
 
 version "0.2"
 group "sword"
+
 apply plugin:"eclipse"
 apply plugin:"idea"
 apply plugin:"war"

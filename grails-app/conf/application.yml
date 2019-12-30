@@ -8,8 +8,8 @@ grails:
             proxies: false
 info:
     app:
-        name: '@info.app.name@'
-        version: '@info.app.version@'
+        name: 'sword'
+        version: '1.0'
         grailsVersion: '@info.app.grailsVersion@'
 spring:
     groovy:
@@ -21,6 +21,8 @@ endpoints:
     jmx:
         enabled: true
 
+serverURL: 'http://localhost:8080/sword'
+appName: 'sword'
 ---
 grails:
     mime:

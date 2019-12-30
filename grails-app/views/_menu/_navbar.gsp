@@ -17,9 +17,9 @@
 
 		<div class="navbar-collapse collapse"aria-expanded="false" style="height: 0.8px;"  role="navigation">
 		
-		<!--ul class="nav navbar-nav navbar-right">
+		<ul class="nav navbar-nav navbar-right">
 			<g:render template="/_menu/classics"/>
-		</ul-->
+		</ul>
 		<!--ul class="nav navbar-nav navbar-right">
 			<g:render template="/_menu/bible"/>
 		</ul-->

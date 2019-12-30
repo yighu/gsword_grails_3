@@ -74,6 +74,7 @@ function searchBible(){
 }
 
 function locate(){
+	console.log("locate....hu");
   var bible=getBooks();
     var reference=$('reference').value;
     ${remoteFunction(
@@ -496,7 +497,7 @@ return false;
 }
 function changeLocale(){
     
-    location.reload("/gsword/gbook/v?lang=\'"+$('lang').value+"\'");
+    location.reload("/gbook/v?lang=\'"+$('lang').value+"\'");
     return false;
 
 }

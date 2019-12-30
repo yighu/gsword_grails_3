@@ -15,11 +15,13 @@ $('#dictionaries').on(eventType, function(e) {
 });
 */
 
-
+function ctx(){
+	return "/"+window.location.pathname.split('/')[1]+"/";
+}
 function dailydevotion(book){
 $.ajax({
   type: "POST",
-  url: "/gbook/devotion",
+  url: ctx()+"devotion",
   data: { devotion: book}
 })
   .done(function( msg ) {
@@ -30,7 +32,7 @@ function updateChaptersperbible(bible){
 
 $.ajax({
   type: "POST",
-  url: "/gbook/getChaps",
+  url: ctx()+"getChaps",
   data: { bible: bible}
 })
   .done(function( msg ) {
@@ -104,7 +106,7 @@ function searchBible(){
     if (key){
 $.ajax({
   type: "POST",
-  url: "/gbook/searchBible",
+  url: ctx()+"searchBible",
   data: { bible: bible, key: key }
 })
   .done(function( msg ) {
@@ -121,7 +123,7 @@ function displayBible(reference){
 //console.log(reference);
 $.ajax({
   type: "POST",
-  url: "/gbook/display",
+  url: ctx()+"display",
   data: { bible: bible, key: reference,start:0,limit:500}
 })
   .done(function( msg ) {
@@ -139,7 +141,7 @@ function locate(){
 //console.log("locate ref:"+reference);
 $.ajax({
   type: "POST",
-  url: "/gbook/display",
+  url: ctx()+"/display",
   data: { bible: bible, key: reference,start:verseStart,limit:verseLimit}
 })
   .done(function( msg ) {
@@ -238,7 +240,7 @@ function getOsis(bible,ref,start,limit){
 //console.log(ref);
 $.ajax({
   type: "POST",
-  url: "/gbook/getOsis",
+  url: ctx()+"getOsis",
   data: { bible: bible, reference: ref,start:start,limit:limit}
 })
   .done(function( msg ) {
@@ -335,7 +337,7 @@ $('#chaps').html("");
 $('#reference').html("");
 if (bible){ $.ajax({
   type: "POST",
-  url: "/gbook/getChaps",
+  url: ctx()+"getChaps",
   data: { bible: bible}
 })
   .done(function( msg ) {
@@ -365,7 +367,7 @@ function searchDictionary(){
     var key=$('#keyword').val()              ;
 if(key!=null) $.ajax({
   type: "POST",
-  url: "/gbook/searchDictionary",
+  url: ctx()+"searchDictionary",
   data: { dic: dic,key:key}
 })
   .done(function( msg ) {
@@ -379,7 +381,7 @@ function searchDictionaryp(){
     var key=$('#keyp').val()              ;
 $.ajax({
   type: "POST",
-  url: "/gbook/searchDictionary",
+  url: ctx()+"searchDictionary",
   data: { dic: bible, key: key}
 })
   .done(function( msg ) {
@@ -391,7 +393,7 @@ function tweet(){
     
 $.ajax({
   type: "POST",
-  url: "/gbook/ontwitter",
+  url: ctx()+"ontwitter",
   data: { dic: bible, key: key}
 })
   .done(function( msg ) {
@@ -448,7 +450,7 @@ function unpick_commentary()
   function showword(bible){
 $.ajax({
   type: "POST",
-  url: "/gbook/daily",
+  url: ctx()+"daily",
   data: { bible: bible }
 })
   .done(function( msg ) {
@@ -459,7 +461,7 @@ $.ajax({
   function showword3yr(bible){
 $.ajax({
   type: "POST",
-  url: "/gbook/daily3yr",
+  url: ctx()+"daily3yr",
   data: { bible: bible }
 })
   .done(function( msg ) {
@@ -513,7 +515,7 @@ function sendmail(){
     var comment=$('#usercomment').val()                ;
 $.ajax({
   type: "POST",
-  url: "/gbook/sendmail",
+  url: ctx()+"sendmail",
   data: { name: name,email:email,comment:comment}
 })
   .done(function( msg ) {
@@ -533,7 +535,7 @@ function genppt(){
     var reference=$('#reference').val();
 $.ajax({
   type: "POST",
-  url: "/gbook/ppt",
+  url: ctx()+"ppt",
   data: { version: bible,key:reference}
 })
   .done(function( msg ) {
@@ -547,7 +549,7 @@ function showxref(){
 
 $.ajax({
   type: "POST",
-  url: "/gbook/flipXRef",
+  url: ctx()+"flipXRef",
   data: { version: bible,key:reference,start:verseStart,limit:verseLimit }
 })
   .done(function( msg ) {
@@ -561,7 +563,7 @@ function showheadings(){
 
 $.ajax({
   type: "POST",
-  url: "/gbook/flipHeadings",
+  url: ctx()+"flipHeadings",
   data: { version: bible,key:reference,start:verseStart,limit:verseLimit }
 })
   .done(function( msg ) {
@@ -575,7 +577,7 @@ function showstrongs(){
 	//console.log("show strongs:"+bible+" ref:"+reference);
 $.ajax({
   type: "POST",
-  url: "/gbook/flipStrongs",
+  url: ctx()+"/flipStrongs",
   data: { version: bible,key:reference,start:verseStart,limit:verseLimit }
 })
   .done(function( msg ) {
@@ -589,7 +591,7 @@ function shownotes(){
 
 $.ajax({
   type: "POST",
-  url: "/gbook/flipNotes",
+  url: ctx()+"flipNotes",
   data: { version: bible,key:reference,start:verseStart,limit:verseLimit }
 })
   .done(function( msg ) {
@@ -604,7 +606,7 @@ function showmorph(){
 
 $.ajax({
   type: "POST",
-  url: "/gbook/flipMorph",
+  url: ctx()+"/flipMorph",
   data: { version: bible,key:reference,start:verseStart,limit:verseLimit }
 })
   .done(function( msg ) {
@@ -617,7 +619,7 @@ var bible=getBooks();
             
 $.ajax({
   type: "POST",
-  url: "/gbook/flipVline",
+  url: ctx()+"/flipVline",
   data: { version: bible,key:reference,start:verseStart,limit:verseLimit }
 })
   .done(function( msg ) {
@@ -627,7 +629,7 @@ $.ajax({
 function doProtocol(protocol,lemma){
 $.ajax({
   type: "POST",
-  url: "/gbook/handleProtocol",
+  url: ctx()+"/handleProtocol",
   data: { protoc: protocol,key:lemma,start:verseStart,limit:verseLimit }
 })
   .done(function( msg ) {
@@ -657,7 +659,7 @@ function offAuxform(){
 }
 function changeLocale(){
     
-    location.reload("/gbook/v?lang=\'"+$('#lang').val()+"\'");
+    location.reload("/v?lang=\'"+$('#lang').val()+"\'");
     return false;
 
 }
@@ -686,7 +688,7 @@ function showhelp(){
     if (helptxt) $('liveform').innerHTML=helptxt;
     else $.ajax({
   	type: "POST",
-  	url: "/gbook/fetchHelp",
+  	url: ctx()+"/fetchHelp",
 	})
   		.done(function( msg ) {
     			updateAuxForm(msg);
@@ -697,7 +699,7 @@ function showcomment(){
     if (commentform) $('liveform').innerHTML=commentform;
     else $.ajax({
   	type: "POST",
-  	url: "/gbook/fetchCommentForm",
+  	url: ctx()+"/fetchCommentForm",
 	})
   		.done(function( msg ) {
     			updateAuxForm(msg);
@@ -708,7 +710,7 @@ function showadvsearch(){
     if (commentform) $('#liveform').html(commentform);
     else $.ajax({
   	type: "POST",
-  	url: "/gbook/advsearch",
+  	url: ctx()+"/advsearch",
 	})
   		.done(function( msg ) {
 		//console.log("showadvsearch:"+msg);
@@ -720,7 +722,7 @@ function searchGen2(){
     var chap=$('#genbooksch2').val()  ;
 $.ajax({
   type: "POST",
-  url: "/gbook/gentxtremote",
+  url: ctx()+"/gentxtremote",
   data: { key: chap}
 }).done(function( msg ) {
    updateFormgen(msg);
@@ -730,7 +732,7 @@ function searchGen(){
     var chap=$('#genbooksch').val()  ;
 $.ajax({
   type: "POST",
-  url: "/gbook/gentxtremote",
+  url: ctx()+"/gentxtremote",
   data: { key: chap}
 }).done(function( msg ) {
    updateFormgen(msg);
@@ -758,7 +760,7 @@ function doStrongs(obj,protocol,lemma){
 if(!$(obj).attr('data-original-title')){
 $.ajax({
   type: "POST",
-  url: "/gbook/handleProtocol",
+  url: ctx()+"/handleProtocol",
   data: { protoc: protocol,key:lemma,start:verseStart,limit:verseLimit }
 })
   .done(function( msg ) {

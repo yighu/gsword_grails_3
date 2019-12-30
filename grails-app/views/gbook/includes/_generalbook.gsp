@@ -3,13 +3,14 @@
   <g:each in="${books}" status="i" var="book">
        <g:link action="c" id="${book.initials}">${book.name.encodeAsHTML()} |</g:link>
     </g:each>
+
       </td>
     </tr>   
 </table>
 
 <div>
             <g:message code="selectchapter" />:
-			<g:select name="genbooksch" id="genbooksch" style="width:200px"
+			<g:select name="genbooksch" id="genbooksch" style="width:100%"
 			  from="${gendropdowntoc}" value="name" optionKey="value" optionValue="value" onchange="searchGen();"/>
 
 </div>
@@ -19,7 +20,7 @@
 <hr/>
 
             <g:message code="selectchapter" />:
-			<g:select name="genbooksch2" id="genbooksch2" style="width:200px"
+			<g:select name="genbooksch2" id="genbooksch2" style="width:100%"
 			  from="${gendropdowntoc}" value="name" optionKey="value" optionValue="value" onchange="searchGen2();"/>
 <hr/>
 <hr/>

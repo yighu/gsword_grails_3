@@ -16,7 +16,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <feed:meta kind="rss" version="2.0" controller="gbook" action="feed"/>
 
-  <!--<link rel="stylesheet" type="text/css" href="/gsword/css/iBD.css"/>-->
+  <!--<link rel="stylesheet" type="text/css" href="/css/iBD.css"/>-->
   <link rel="stylesheet" type="text/css" href="${createLinkTo(dir:pluginContextPath,file:'css/iBD.css')}" />
 
   <g:javascript library="application" />
@@ -120,7 +120,7 @@ function locate(){
   }
  function openwin(e){
          var result=eval( e.responseJSON ) ;
-          popup("/gsword/"+result.data, "PowerPoint") ;
+          popup("/"+result.data, "PowerPoint") ;
   }
 
 function popup(mylink, windowname)
@@ -425,7 +425,7 @@ function showProtocolData(e){
 }
 function changeLocale(){
     
-    location.reload("/gsword/gbook/v?lang=\'"+$('lang').value+"\'");
+    location.reload("/gbook/v?lang=\'"+$('lang').value+"\'");
     return false;
 
 }

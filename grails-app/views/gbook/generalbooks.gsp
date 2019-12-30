@@ -42,6 +42,6 @@
   </div>
 </div>
 
-<a href="/gsword"><g:message code="home" /> |</a>
+<a href="/"><g:message code="home" /> |</a>
 </body>
 </html>

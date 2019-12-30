@@ -1,4 +1,5 @@
 environments {
+	appName="sword"
     development {
         grails.logging.jul.usebridge = true
       docroot="/Users/yiguanghu/backup/yiguanghu/ccim/ccimresourceongoogle/gaelykrelated/githubhome/gswordbootstrap/web-app/pt"

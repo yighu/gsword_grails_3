@@ -3,7 +3,7 @@
 <head>
     <meta name="layout" content="main"/>
     <title>GSword</title>
-<meta http-equiv="refresh" content="0; url=/gbook/v" />
+<meta http-equiv="refresh" content="0; url=gbook/v" />
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
 </head>
 <body>

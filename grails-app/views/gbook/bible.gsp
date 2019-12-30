@@ -11,7 +11,7 @@
 <head>
   <title>CCIM bible studio</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <link rel="stylesheet" type="text/css" href="/gsword/css/iBD.css"/>
+  <link rel="stylesheet" type="text/css" href="/css/iBD.css"/>
   <g:javascript library="application" />
 <modalbox:modalIncludes />
 
