@@ -56,7 +56,7 @@
 		<div class="divButton" onclick="showadvsearch();"> <g:message code="AdvancedSearch" />
 		</div>
 		<!--div class="divButton" onclick="shownotes();" title="Click me to show notes ">Note </div-->
-<select onchange="generatePPT();" name="PPT" id="pptSelect" class="books" title="PPT">
+<select onchange="generatePPT();" name="PPT" id="pptSelect" class="books" title="PPT: use Main book or do parallel">
 <option value="">PPT</option>
 <option value="single">Main Bible</option>
 <option value="parallel">Parallel</option>

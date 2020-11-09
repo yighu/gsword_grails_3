@@ -23,7 +23,7 @@ environments {
 
         // TODO: grails.serverURL = "http://www.changeme.com"
         grails.serverURL = "http://www.ccimweb.org/gsword"
-        docroot="/home/tomcat/apache-tomcat/webapps/gsword"
+        docroot="/home/tomcat/apache-tomcat/webapps/ROOT"
         membibleid="/home/tomcat/membible/lastid.txt"
         membiblesch="/home/tomcat/membible/membiblesch.txt"
       keyroot="/home/tomcat/keywords"

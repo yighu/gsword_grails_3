@@ -193,7 +193,7 @@ $.ajax({
       }
   }
  function openwin(e){
-	var ptf="pt/"+e.data;
+	var ptf="/"+e.data;
           setInfo("<a href=\""+ptf+"\">Download PowerPoint Here</a>") ;
           popup(ptf, "PowerPoint") ;
 

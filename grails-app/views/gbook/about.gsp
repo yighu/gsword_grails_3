@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-<!--meta HTTP-EQUIV="REFRESH" content="0; url=/gsword/gbook/v"-->
+<!--meta HTTP-EQUIV="REFRESH" content="0; url=/gbook/v"-->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main" />
     <!--meta name="layout" content="guimain" /-->
@@ -52,9 +52,9 @@ function showcomment(){
 <td width="10%">
 <ul>
   <li>
-    <a href="/gsword/bible/read"><g:message code="readbible" /></a>
+    <a href="/bible/read"><g:message code="readbible" /></a>
   <li>
-    <a href="/gsword/bible/search"> <g:message code="searchthebible" /></a>
+    <a href="/bible/search"> <g:message code="searchthebible" /></a>
   </li>
   <li>
     <a href="v"><g:message code="researchbible" /> </a>
@@ -63,7 +63,7 @@ function showcomment(){
     <a href="c"> <g:message code="classics" /> </a>
   </li>
    <li>
-    <a href="/gsword/bible/cmnt"> <g:message code="commentary" /> </a>
+    <a href="/bible/cmnt"> <g:message code="commentary" /> </a>
   </li>
   <li>
     <a href="searchdics"> <g:message code="dictionarylookup" /> </a>
@@ -72,7 +72,7 @@ function showcomment(){
   <li><a href="http://www.twitter.com/membible"><g:message code="memorize" /></a></li>
 
   <li> <g:link controller="gbook" action="oneyearbible" title="One Year Through Bible"><g:message code="oneyearbiblechinese" /></g:link> </li>
-<li><a href="/gsword/help/help.xhtml"><span><g:message code="help"/></span></a> </li> 
+<li><a href="/help/help.xhtml"><span><g:message code="help"/></span></a> </li> 
 </ul>
 </td>
 <td>
@@ -84,10 +84,10 @@ function showcomment(){
  <g:render template="/bible/includes/searchbible"/>
 <p class="txt-sm">
 For more search options, try: 
-<a href="/gsword/bible/read" title="Look for a passage in one or more Bible versions">Passage&nbsp;Lookup</a>&nbsp;| 
-<a href="/gsword/bible/search" title="Search for keywords or phrases in one or more Bible versions">Keyword&nbsp;Search</a>&nbsp;| 
-<a href="/gsword/gbook/searchdics" title="Search in Dictionary(Topical)">Dictionary(or Topical)&nbsp;Search</a>&nbsp;| 
-<a href="/gsword/gbook/v" title="Studio">Online&nbsp;Bible&nbsp;Studio</a>
+<a href="/bible/read" title="Look for a passage in one or more Bible versions">Passage&nbsp;Lookup</a>&nbsp;| 
+<a href="/bible/search" title="Search for keywords or phrases in one or more Bible versions">Keyword&nbsp;Search</a>&nbsp;| 
+<a href="/gbook/searchdics" title="Search in Dictionary(Topical)">Dictionary(or Topical)&nbsp;Search</a>&nbsp;| 
+<a href="/gbook/v" title="Studio">Online&nbsp;Bible&nbsp;Studio</a>
 </p>
 </div>
 
@@ -127,7 +127,7 @@ Download Mobile applications:
 <p>
 <!--
   <a href="http://www.facebook.com/group.php?gid=1714831533">GSword Facebook<img src="/gsword/images/ipcn-fb.png" width="55" height="25" alt="facebook" title="facebook" border="0"/></a><br/>
-  <a href="http://www.ccimweb.org/gsword/gbook/feed"><g:message code="feed"/><img border="0" src="/gsword/images/icon-rss.png" width="55" height="25" alt="rss" title="rss"/></a><br/>
+  <a href="http://www.gsword.org/gbook/feed"><g:message code="feed"/><img border="0" src="/gsword/images/icon-rss.png" width="55" height="25" alt="rss" title="rss"/></a><br/>
            <modalbox:createLink controller="gbook" action="contactus" title='Contact us/Feedback' width="400" linkname='Contact us/Feedback' /><br/>
 <a href="http://bible.ccim.org/" target="_blank"> <g:message code="oldtool" /></a><br/>
 -->

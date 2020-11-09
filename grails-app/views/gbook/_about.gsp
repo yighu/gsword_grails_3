@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-<!--meta HTTP-EQUIV="REFRESH" content="0; url=/gsword/gbook/v"-->
+<!--meta HTTP-EQUIV="REFRESH" content="0; url=/gbook/v"-->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main" />
     <!--meta name="layout" content="guimain" /-->
@@ -40,7 +40,7 @@
   <li><a href="http://www.twitter.com/membible"><g:message code="memorize" /></a></li>
 
   <li> <g:link controller="gbook" action="oneyearbible" title="One Year Through Bible"><g:message code="oneyearbiblechinese" /></g:link> </li>
-<li><a href="/gsword/help/help.xhtml"><span><g:message code="help"/></span></a> </li> 
+<li><a href="/help/help.xhtml"><span><g:message code="help"/></span></a> </li> 
 </ul>
 </td>
 <td>
@@ -52,10 +52,10 @@
  <g:render template="/bible/includes/searchbible"/>
 <p class="txt-sm">
 For more search options, try: 
-<a href="/gsword/bible/read" title="Look for a passage in one or more Bible versions">Passage&nbsp;Lookup</a>&nbsp;| 
-<a href="/gsword/bible/search" title="Search for keywords or phrases in one or more Bible versions">Keyword&nbsp;Search</a>&nbsp;| 
-<a href="/gsword/gbook/searchdics" title="Search in Dictionary(Topical)">Dictionary(or Topical)&nbsp;Search</a>&nbsp;| 
-<a href="/gsword/gbook/v" title="Studio">Online&nbsp;Bible&nbsp;Studio</a>
+<a href="/bible/read" title="Look for a passage in one or more Bible versions">Passage&nbsp;Lookup</a>&nbsp;| 
+<a href="/bible/search" title="Search for keywords or phrases in one or more Bible versions">Keyword&nbsp;Search</a>&nbsp;| 
+<a href="/gbook/searchdics" title="Search in Dictionary(Topical)">Dictionary(or Topical)&nbsp;Search</a>&nbsp;| 
+<a href="/gbook/v" title="Studio">Online&nbsp;Bible&nbsp;Studio</a>
 </p>
 </div>
 
@@ -75,7 +75,7 @@ For more search options, try:
 <br/>
 Follows us on twitters:
   <a href="http://www.twitter.com/gsword">Meditate the Word<img border="0" src="/gsword/images/icon-twitter.png" width="55" height="25" alt="twitter" title="twitter"/></a>
-  <a href="http://www.twitter.com/membible">Memorize Bible, One Verse a day<img border="0" src="/gsword/images/icon-twitter.png" width="55" height="25" alt="twitter" title="twitter"/></a>
+  <a href="http://www.twitter.com/membible">Memorize Bible, One Verse a day<img border="0" src="/images/icon-twitter.png" width="55" height="25" alt="twitter" title="twitter"/></a>
 <br/>
 Read the twitts here: 
         <g:link controller="gbook" action="feeds" title="Daily twitts">Twitter</g:link>

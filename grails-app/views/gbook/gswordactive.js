@@ -481,7 +481,7 @@ return false;
 }
 function changeLocale(){
     
-    location.reload("/gsword/gbook/v?lang=\'"+$('lang').value+"\'");
+    location.reload("/gbook/v?lang=\'"+$('lang').value+"\'");
     return false;
 
 }

@@ -46,6 +46,7 @@ class GbookController {
   private static final String NOTES= "Notes"; //$NON-NLS-1$
   private static final String HEADINGS= "Headings"; //$NON-NLS-1$
   private static final String XREF= "XRef"; //$NON-NLS-1$
+  def     rootlink = "http://www.gsword.org/gbook/"
   def jswordService
   def languageService
   //def scaffold = Gbook
@@ -117,7 +118,7 @@ class GbookController {
 
         def kk = base + DELIM + k.getName()
 
-        result.append(indnt + "<a href=\"/gsword/gbook/gentxt?key=${kk.encodeAsHTML()}\">" + k.getName() + "</a>"+BR)
+        result.append(indnt + "<a href=\"/gbook/gentxt?key=${kk.encodeAsHTML()}\">" + k.getName() + "</a>"+BR)
       }
     }
 
@@ -767,7 +768,7 @@ chosen
     shape.setText(text)
     int fontsize=42;
    if (rows>1)fontsize =30
-    rt.setFontSize(fontsize);
+   rt.setFontSize(fontsize);
 
     rt.setBullet(true);
     rt.setBulletOffset(0);  //bullet offset
@@ -841,7 +842,7 @@ chosen
     try{
  	def currentDir = new File(".").getAbsolutePath() 
 	println("current dir:"+currentDir+"\n configured:"+grailsApplication.config.docroot)
-    FileOutputStream out = new FileOutputStream(grailsApplication.config.docroot + "/pt/" + session.id + ".ppt");
+    FileOutputStream out = new FileOutputStream(grailsApplication.config.docroot + "/" + session.id + ".ppt");
     // File fl=new File(session.id + ".ppt")
     // println fl.getAbsolutePath()
     //FileOutputStream out = new FileOutputStream(fl);
@@ -856,7 +857,6 @@ chosen
     render map as JSON
   }
   def pptparallel = {
-	println('pptparallel....');
     SlideShow ppt = new SlideShow();
     if (params.version?.equals("KJV")) {
       if (session.englishbibles == null) {
@@ -882,7 +882,6 @@ chosen
       biblekeymap = session.chinesebiblekeymap
 
     }
-       println "version:" + params.version
 	def version=params.version.replace(",,",",")
        println "parallel version:" + version
 def	lists=params.version.split(",").findAll{it?.trim()}.collect{getPlainText(it, params.key, 200, session)}
@@ -890,25 +889,20 @@ def	lists=params.version.split(",").findAll{it?.trim()}.collect{getPlainText(it,
     def rest=lists.tail()
     list.each {
         Slide s1ide = ppt.createSlide();
-	println("ssdfsf:"+it)
 	String nm=it.name
  	def txt=it.text.trim()
-	print nm +" "+rest.size()
 	if(rest)txt +="\r"+reTriveText(nm,rest);
 				
         createSlide(s1ide, txt,it.cbook?.trim() + "" + it.chapter + ":" + it.verse,lists.size())
     }
     try{
  	def currentDir = new File(".").getAbsolutePath() 
-	println("current dir:"+currentDir)
 	
-    def file=grailsApplication.config.docroot + "/pt/" + session.id + ".ppt";
-	println("file :"+file)
+    def file=grailsApplication.config.docroot + "/" + session.id + ".ppt";
     FileOutputStream out = new FileOutputStream(file);
     ppt.write(out);
     out.close();
 	}catch (Exception e){
-	e.printStackTrace()
 	println "failed save:"+session.id
 	}
 
@@ -917,7 +911,6 @@ def	lists=params.version.split(",").findAll{it?.trim()}.collect{getPlainText(it,
     render map as JSON
   }
  def reTriveText= {name, rest->
-	println("retrive......"+rest?.size() +" name="+name)
     rest.collect{reTriveTextFromOneBook(name,it)}?.join("\r")
 
 };
@@ -986,7 +979,6 @@ def	lists=params.version.split(",").findAll{it?.trim()}.collect{getPlainText(it,
   }
 
   private getPlainText(String bookInitials, String reference, int maxKeyCount, HttpSession session) throws BookException, NoSuchKeyException {
-	println 'Book initials...'+bookInitials
     if (bookInitials == null || reference == null) {
       return null;
     }
@@ -1034,7 +1026,6 @@ def	lists=params.version.split(",").findAll{it?.trim()}.collect{getPlainText(it,
 
   private retrivebookfromreference(String reference, String bookInitials, String language, HttpSession session) {
     def x = jswordService.fetchbook(reference)
-    //   println " language for refer:"+language +" bookInitials="+bookInitials
     String book = x
     if (x?.length() > 1) {
       if (language?.equalsIgnoreCase("Chinese")) {
@@ -1044,7 +1035,6 @@ def	lists=params.version.split(",").findAll{it?.trim()}.collect{getPlainText(it,
       } else {
         book = x
       }
-      //   println "old book x="+x +" book="+book
       return book                                                                                       
     } else {
       if (language?.equalsIgnoreCase("Chinese")) {
@@ -1180,7 +1170,7 @@ def	lists=params.version.split(",").findAll{it?.trim()}.collect{getPlainText(it,
     def data
     def reader
     try {
-      URL url = new URL("http://localhost:8080/gsword/gbook/randomVerseJSON");
+      URL url = new URL(rootlink+"randomVerseJSON");
       reader = new BufferedReader(new InputStreamReader(url.openStream()));
       JsonParser jp = new JsonParser()
       JsonElement je = jp.parse(reader)
@@ -1967,36 +1957,36 @@ println "in readstyledtext:"+bookInitials+" "+key
     //def description=""
     render(feedType: "rss", feedVersion: "2.0") {
        title = "GSword Daily Devotion"
-       link = "http://rock.ccim.org/gsword/gbook/feed"
+       link = rootlink+"feed"
        description = "GSword Daily Devotion"
       entry("Streams in the Desert") {
         title = "Streams in the Desert"
-        link = "http://rock.ccim.org/gsword/gbook/v"
+        link = rootlink+"v"
         strms
       }
       entry("Day By Day By Grace") {
         title = "Day By Day By Grace"
-        link = "http://rock.ccim.org/gsword/gbook/v"
+        link = rootlink+"v"
         dbd
       }
       entry("C. H. Spurgeon Morning and Evening: Daily Readings") {
         title = "C. H. Spurgeon Morning and Evening: Daily Readings"
-        link = "http://rock.ccim.org/gsword/gbook/v"
+        link = rootlink+"v"
         sme
       }
       entry("One Year Bible (Simplified Chinese Union)") {
         title = "One Year Bible (Simplified Chinese Union)"
-        link = "http://rock.ccim.org/gsword/gbook/v"
+        link = rootlink+"v"
         chiuns
       }
       entry("One Year Bible (Simplified New Chinese Version)") {
         title = "One Year Bible (Simplified New Chinese Version)"
-        link = "http://rock.ccim.org/gsword/gbook/v"
+        link = rootlink+"v"
         ncvs
       }
       entry("One Year Bible (King James Version)") {
         title = "One Year Bible (King James Version)"
-        link = "http://rock.ccim.org/gsword/gbook/v"
+        link = rootlink+"v"
         kjv
       }
     }

@@ -108,7 +108,7 @@ function locate(){
   }
  function openwin(e){
          var result=eval( e.responseJSON ) ;
-	var ptf="http://www.ccimweb.org/gsword/"+result.data;
+	var ptf="http://www.gsword.org/"+result.data;
           setInfo("<a href=\""+ptf+"\">Download PowerPoint Here</a>") ;
           popup(ptf, "PowerPoint") ;
 

@@ -619,7 +619,7 @@ private createSlide(Slide s1ide, String text) {
       Slide s1ide = ppt.createSlide();
       createSlide(s1ide, text)
     }
-    FileOutputStream out = new FileOutputStream(grailsApplication.config.docroot + "/ppt/" + session.id + ".ppt");
+    FileOutputStream out = new FileOutputStream(grailsApplication.config.docroot + "/" + session.id + ".ppt");
     // File fl=new File(session.id + ".ppt")
     // println fl.getAbsolutePath()
     //FileOutputStream out = new FileOutputStream(fl);
@@ -1353,36 +1353,36 @@ private createSlide(Slide s1ide, String text) {
     //def description=""
     render(feedType: "rss", feedVersion: "2.0") {
       title = "GSword Daily Devotion"
-      link = "http://rock.ccim.org/gsword/gbook/feed"
+      link = "http://www.gsword.org/gbook/feed"
       description = "GSword Daily Devotion"
       entry("Streams in the Desert") {
         title = "Streams in the Desert"
-        link = "http://rock.ccim.org/gsword/gbook/v"
+        link = "http://www.gsword.org/gbook/v"
         strms
       }
       entry("Day By Day By Grace") {
         title = "Day By Day By Grace"
-        link = "http://rock.ccim.org/gsword/gbook/v"
+        link = "http://www.gsword.org/gbook/v"
         dbd
       }
       entry("C. H. Spurgeon Morning and Evening: Daily Readings") {
         title = "C. H. Spurgeon Morning and Evening: Daily Readings"
-        link = "http://rock.ccim.org/gsword/gbook/v"
+        link = "http://www.gsword.org/gbook/v"
         sme
       }
       entry("One Year Bible (Simplified Chinese Union)") {
         title = "One Year Bible (Simplified Chinese Union)"
-        link = "http://rock.ccim.org/gsword/gbook/v"
+        link = "http://www.gsword.org/gbook/v"
         chiuns
       }
       entry("One Year Bible (Simplified New Chinese Version)") {
         title = "One Year Bible (Simplified New Chinese Version)"
-        link = "http://rock.ccim.org/gsword/gbook/v"
+        link = "http://www.gsword.org/gbook/v"
         ncvs
       }
       entry("One Year Bible (King James Version)") {
         title = "One Year Bible (King James Version)"
-        link = "http://rock.ccim.org/gsword/gbook/v"
+        link = "http://www.gsword.org/gbook/v"
         kjv
       }
     }
