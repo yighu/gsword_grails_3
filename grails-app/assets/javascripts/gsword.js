@@ -1,4 +1,5 @@
 var selectedbooks=new Array();
+var parallelbooks=new Array();
 var console=console||{}; //make console not break on ie
 //console.log=console.log||function(){};//turn this on for dev
 //console.log=function(){}; //turn off log before prod build
@@ -43,12 +44,15 @@ $.ajax({
 }
 function addBooks(selected){
         var len=selectedbooks.length;
-        if (len<4&&selected.length>0){
+	console.log("selected :"+selected);
+	console.log("existing selected books:"+selectedbooks);
+        if (len<3&&selected.length>0){
         var index=selectedbooks.indexOf(selected);
         if (index==-1){
                 selectedbooks.push(selected);
         }
         }
+	console.log("After Add selected books:"+selectedbooks);
 }
 function removeBooks(selected){
         var index=selectedbooks.indexOf(selected);
@@ -57,19 +61,29 @@ function removeBooks(selected){
         }
 }
 function flipBooks(selected){
-        var index=selectedbooks.indexOf(selected);
-        var len=selectedbooks.length;
-        if (index==-1&&len<4){
-                selectedbooks.push(selected);
-        }else{
-                selectedbooks.splice(index,1);
+        var mainbook=getBook();
+	if (mainbook==selected){
+	console.log("main book equals selected. ignore parallel add");
+	}else{
+	console.log("current parallel book:"+parallelbooks);
+	console.log("selected:"+selected);
+        var index=parallelbooks.indexOf(selected);
+        if (index==-1){
+        	var len=parallelbooks.length;
+		if(len<4) parallelbooks.push(selected);
+            }else{
+  		parallelbooks.splice(index, 1);
+		}
 	}
+	console.log("flip after add selected:"+parallelbooks);
 }
 function flip_parallel(){
-        //flipBooks(getParallel());
+	console.log("-----flip_parallel------");
+        flipBooks(getParallel());
         locate();
         }
 function pick_parallel(){
+	console.log("flip_parallel");
         addBooks(getParallel());
         locate();
         }
@@ -79,11 +93,13 @@ function unpick_parallel(){
         }
 function getBooks(){
         var mainbook=getBook();
-  	var parallel=  $('#parallels').val();
+  	var parallel=  parallelbooks;
   	var commentary=  $('#commentaries').val();
 	var bk=mainbook;
-	if(parallel.length>1)bk=bk+","+parallel;
+	console.log("main:"+mainbook+" parallel:"+parallel +" commentar:"+commentary);
+	if(parallel.length>=1)bk=bk+","+parallel;
 	if(commentary.length>1)bk=bk+","+commentary;
+	console.log("book...:"+bk);
 	return bk
 }
 function getDictionary()
@@ -96,7 +112,7 @@ function getCommentary()
 }
 function getParallel()
 {
-	//console.log("paral:"+ $("#parallels").val());
+	console.log("paral:"+ $("#parallels").val());
   return $("#parallels").val();
 }
 
@@ -134,11 +150,12 @@ $.ajax({
 
 function locate(){
   var bible=getBooks();
+   console.log("books to retrive:"+bible);
   var reference=$('#reference').val();
 
-//console.log("locate ref:"+reference);
-//console.log("bible:"+bible);
-//console.log("locate ref:"+reference);
+console.log("locate ref:"+reference);
+console.log("localte bible:"+bible);
+console.log("locate ref:"+reference);
 $.ajax({
   type: "POST",
   url: ctx()+"/display",
@@ -529,6 +546,17 @@ function displaymailsendresponse(e){
       var fom=$('emailstatus');
       fom.innerHTML=result;
 }
+function generatePPT(){
+    var ppt=$('#pptSelect').val();
+	console.log(' generate ppt:'+ppt);
+	if (ppt=='single'){
+		genppt();
+	}else if (ppt=='parallel'){
+		genpptparallel();
+	}else{
+		// no choise
+	}
+	}
 function genppt(){
     setInfo("Please wait generating PowerPoint.....")  ;
     var bible=getBook();
@@ -543,6 +571,19 @@ $.ajax({
   });
 }
 
+function genpptparallel(){
+    var bible=getBook()+","+ parallelbooks;
+    setInfo("Please wait generating parallel PowerPoint for ....."+bible)  ;
+    var reference=$('#reference').val();
+$.ajax({
+  type: "POST",
+  url: ctx()+"pptparallel",
+  data: { version: bible,key:reference}
+})
+  .done(function( msg ) {
+    openwin(msg);
+  });
+}
 function showxref(){
     var bible=getBooks();
     var reference=$('#reference').val();

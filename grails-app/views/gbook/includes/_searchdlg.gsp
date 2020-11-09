@@ -55,9 +55,12 @@
 		</div>
 		<div class="divButton" onclick="showadvsearch();"> <g:message code="AdvancedSearch" />
 		</div>
-		<div class="divButton" onclick="shownotes();" title="Click me to show notes ">Note
-	</div>
-		<div class="divButton" type="button" id="ppt" onclick="genppt();">PPT</div>
+		<!--div class="divButton" onclick="shownotes();" title="Click me to show notes ">Note </div-->
+<select onchange="generatePPT();" name="PPT" id="pptSelect" class="books" title="PPT">
+<option value="">PPT</option>
+<option value="single">Main Bible</option>
+<option value="parallel">Parallel</option>
+</select>
 		
 </header>
 <div style="display:inline" id="info" name="info" /></div>

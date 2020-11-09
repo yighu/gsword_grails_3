@@ -1,5 +1,6 @@
 var selectedbooks=new Array();
 function addBooks(selected){
+	console.log('to add books:'+selected
         var len=selectedbooks.length;
         if (len<4){
         var index=selectedbooks.indexOf(selected);

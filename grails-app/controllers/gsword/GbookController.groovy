@@ -715,9 +715,13 @@ chosen
   }
 
   private createSlide_oneText(Slide s1ide, String text) {
-    // TextBox title = s1ide.addTitle();
-
-    //title.setText(it.get("key"));
+  createSlide_oneText(s1ide, text,null) 
+	}
+  private createSlide_oneText(Slide s1ide, String text,String titletxt) {
+	if (titletxt){
+    	 TextBox title = s1ide.addTitle();
+    		title.setText(titletxt);
+	}
     TextBox shape = new TextBox();
     RichTextRun rt = shape.getTextRun().getRichTextRuns()[0];
     // def ref = search(params.version, params.key)
@@ -742,9 +746,14 @@ chosen
   }
 
   private createSlide(Slide s1ide, String text) {
-    // TextBox title = s1ide.addTitle();
-
-    //title.setText(it.get("key"));
+  createSlide(s1ide, text,null,1) 
+	}
+	
+  private createSlide(Slide s1ide, String text, String titletxt,int rows) {
+	if(titletxt){
+     TextBox title = s1ide.addTitle();
+    title.setText(titletxt);
+}
     TextBox shape = new TextBox();
     RichTextRun rt = shape.getTextRun().getRichTextRuns()[0];
     // def ref = search(params.version, params.key)
@@ -756,15 +765,17 @@ chosen
     "March\r" +
     "April");*/
     shape.setText(text)
-    rt.setFontSize(42);
+    int fontsize=42;
+   if (rows>1)fontsize =30
+    rt.setFontSize(fontsize);
 
     rt.setBullet(true);
     rt.setBulletOffset(0);  //bullet offset
-    rt.setTextOffset(50);   //text offset (should be greater than bullet offset)
+    rt.setTextOffset(20);   //text offset (should be greater than bullet offset)
 //         rt.setBulletChar("\u263A"); //bullet character
     s1ide.addShape(shape);
 
-    shape.setAnchor(new java.awt.Rectangle(50, 0, 650, 650));  //position of the text box in the slide
+    shape.setAnchor(new java.awt.Rectangle(20, 150, 680, 680));  //position of the text box in the slide
     s1ide.addShape(shape);
   }
 
@@ -828,6 +839,8 @@ chosen
       createSlide(s1ide, text)
     }
     try{
+ 	def currentDir = new File(".").getAbsolutePath() 
+	println("current dir:"+currentDir+"\n configured:"+grailsApplication.config.docroot)
     FileOutputStream out = new FileOutputStream(grailsApplication.config.docroot + "/pt/" + session.id + ".ppt");
     // File fl=new File(session.id + ".ppt")
     // println fl.getAbsolutePath()
@@ -842,7 +855,77 @@ chosen
     map.put("data", session.id + ".ppt")
     render map as JSON
   }
+  def pptparallel = {
+	println('pptparallel....');
+    SlideShow ppt = new SlideShow();
+    if (params.version?.equals("KJV")) {
+      if (session.englishbibles == null) {
+          session.englishbibles = jswordService.getBiblesContainer().english.bibles
+          session.englishbiblekeymap = jswordService.getBiblesContainer().english.biblekeymap
+          bibles = session.englishbibles
+          biblekeymap = session.englishbiblekeymap
+      }
+      bibles = session.englishbibles
+      biblekeymap = session.englishbiblekeymap
 
+    } else {
+      if (session.chinesebibles == null) {
+
+          session.chinesebibles = jswordService.getBiblesContainer().chinese.bibles
+          session.chinesebiblekeymap = jswordService.getBiblesContainer().chinese.biblekeymap
+
+          bibles = session.chinesebibles
+          biblekeymap = session.chinesebiblekeymap
+
+      }
+      bibles = session.chinesebibles
+      biblekeymap = session.chinesebiblekeymap
+
+    }
+       println "version:" + params.version
+	def version=params.version.replace(",,",",")
+       println "parallel version:" + version
+def	lists=params.version.split(",").findAll{it?.trim()}.collect{getPlainText(it, params.key, 200, session)}
+    def list = lists.head()
+    def rest=lists.tail()
+    list.each {
+        Slide s1ide = ppt.createSlide();
+	println("ssdfsf:"+it)
+	String nm=it.name
+ 	def txt=it.text.trim()
+	print nm +" "+rest.size()
+	if(rest)txt +="\r"+reTriveText(nm,rest);
+				
+        createSlide(s1ide, txt,it.cbook?.trim() + "" + it.chapter + ":" + it.verse,lists.size())
+    }
+    try{
+ 	def currentDir = new File(".").getAbsolutePath() 
+	println("current dir:"+currentDir)
+	
+    def file=grailsApplication.config.docroot + "/pt/" + session.id + ".ppt";
+	println("file :"+file)
+    FileOutputStream out = new FileOutputStream(file);
+    ppt.write(out);
+    out.close();
+	}catch (Exception e){
+	e.printStackTrace()
+	println "failed save:"+session.id
+	}
+
+    Map map = new HashMap();
+    map.put("data", session.id + ".ppt")
+    render map as JSON
+  }
+ def reTriveText= {name, rest->
+	println("retrive......"+rest?.size() +" name="+name)
+    rest.collect{reTriveTextFromOneBook(name,it)}?.join("\r")
+
+};
+  def reTriveTextFromOneBook={name,book->
+		def tt=book.find{it.name==name}
+		tt.text?.trim()
+		
+  }
   def memv={
 
   def d=jswordService.memVersecurrent(params.b?:"kjv"); 
@@ -903,6 +986,7 @@ chosen
   }
 
   private getPlainText(String bookInitials, String reference, int maxKeyCount, HttpSession session) throws BookException, NoSuchKeyException {
+	println 'Book initials...'+bookInitials
     if (bookInitials == null || reference == null) {
       return null;
     }
@@ -1080,6 +1164,7 @@ chosen
     render mp as JSON
   }
   def display = {
+	println("bible to retrive..."+params.bible)
 
     def text = readStyledText(params.bible, params.key, Integer.parseInt(params.start), Integer.parseInt(params.limit))
 	def bbs=params.bible?.split(",")[0]
