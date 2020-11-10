@@ -9,6 +9,7 @@ class UrlMappings {
             }
         }
 
+        "/gsword"(view:"/index.gsp")
         "/"(view:"/index.gsp")
         "500"(view:'/error')
         "404"(view:'/notFound')
