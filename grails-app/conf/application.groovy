@@ -2,10 +2,9 @@ environments {
 	appName="sword"
     development {
         grails.logging.jul.usebridge = true
-      docroot="/Users/yiguanghu/Downloads/tmp"
       membibleid="c:/tmp/lastid.txt"
       membiblesch="c:/tmp/membiblesch.txt"
-     // docroot="/home/tomcat/apache-tomcat-6.0.20/webapps/gsword"
+    docroot="/Users/yiguanghu/gswordhome/sword/src/main/resources/public/ppt"
         keyroot="/Users/yiguanghu/gswordhome/gsword/externalfiles"
         membibleid="/Users/yiguanghu/ccim/gsword/gsword/web-app/memb/lastid.txt"
         membiblesch="/Users/yiguanghu/ccim/gsword/gsword/web-app/memb/membiblesch.txt"
@@ -23,7 +22,7 @@ environments {
 
         // TODO: grails.serverURL = "http://www.changeme.com"
         grails.serverURL = "http://www.ccimweb.org/gsword"
-        docroot="/home/tomcat/apache-tomcat/webapps/ROOT"
+        docroot="/home/tomcat/apache-tomcat/webapps/ROOT/WEB-INF/classes/public/ppt"
         membibleid="/home/tomcat/membible/lastid.txt"
         membiblesch="/home/tomcat/membible/membiblesch.txt"
       keyroot="/home/tomcat/keywords"
