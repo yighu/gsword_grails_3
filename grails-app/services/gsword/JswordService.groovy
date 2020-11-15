@@ -23,10 +23,6 @@ import java.text.SimpleDateFormat;
 import org.crosswire.jsword.book.Defaults;
 import org.crosswire.bibledesktop.desktop.XSLTProperty
 import org.crosswire.jsword.versification.BibleNames
-import org.apache.poi.hslf.usermodel.SlideShow
-import org.apache.poi.hslf.model.Slide
-import org.apache.poi.hslf.model.TextBox
-import org.apache.poi.hslf.usermodel.RichTextRun
 import org.springframework.web.context.request.RequestContextHolder
 
 class JswordService {

@@ -3,10 +3,6 @@ import grails.converters.JSON
 import java.text.SimpleDateFormat
 import javax.servlet.http.HttpSession
 import javax.xml.transform.TransformerException
-import org.apache.poi.hslf.model.Slide
-import org.apache.poi.hslf.model.TextBox
-import org.apache.poi.hslf.usermodel.RichTextRun
-import org.apache.poi.hslf.usermodel.SlideShow
 import org.crosswire.bibledesktop.desktop.XSLTProperty
 import org.crosswire.common.util.NetUtil
 import org.crosswire.common.util.ResourceUtil
@@ -507,131 +503,7 @@ println params
     
   }
 
-  private createSlide_oneText(Slide s1ide, String text) {
-    // TextBox title = s1ide.addTitle();
 
-    //title.setText(it.get("key"));
-    TextBox shape = new TextBox();
-    RichTextRun rt = shape.getTextRun().getRichTextRuns()[0];
-    // def ref = search(params.version, params.key)
-    //println " bibe:"+params.version +" key:"+params.key  +" ref:"+ref
-
-    /*   shape.setText(
-"January\r" +
-    "February\r" +
-    "March\r" +
-    "April");*/
-    shape.setText(text)
-    rt.setFontSize(42);
-
-    rt.setBullet(true);
-    rt.setBulletOffset(0);  //bullet offset
-    rt.setTextOffset(50);   //text offset (should be greater than bullet offset)
-//         rt.setBulletChar("\u263A"); //bullet character
-    s1ide.addShape(shape);
-
-    shape.setAnchor(new java.awt.Rectangle(50, 20, 650, 650));  //position of the text box in the slide
-    s1ide.addShape(shape);
-  }
-
-private createSlide(Slide s1ide, String text) {
-    // TextBox title = s1ide.addTitle();
-
-    //title.setText(it.get("key"));
-    TextBox shape = new TextBox();
-    RichTextRun rt = shape.getTextRun().getRichTextRuns()[0];
-    // def ref = search(params.version, params.key)
-    //println " bibe:"+params.version +" key:"+params.key  +" ref:"+ref
-
-    /*   shape.setText(
-"January\r" +
-    "February\r" +
-    "March\r" +
-    "April");*/
-    shape.setText(text)
-    rt.setFontSize(42);
-
-    rt.setBullet(true);
-    rt.setBulletOffset(0);  //bullet offset
-    rt.setTextOffset(50);   //text offset (should be greater than bullet offset)
-//         rt.setBulletChar("\u263A"); //bullet character
-    s1ide.addShape(shape);
-
-    shape.setAnchor(new java.awt.Rectangle(50, 0, 650, 650));  //position of the text box in the slide
-    s1ide.addShape(shape);
-  }
-
-  def ppt = {
-    SlideShow ppt = new SlideShow();
-    if (params.version?.equals("KJV")) {
-      if (session.englishbibles == null) {
-          session.englishbibles = jswordService.getBiblesContainer().english.bibles
-          session.englishbiblekeymap = jswordService.getBiblesContainer().english.biblekeymap
-      bibles = session.englishbibles
-      biblekeymap = session.englishbiblekeymap
-
-      }
-      bibles = session.englishbibles
-      biblekeymap = session.englishbiblekeymap
-
-    } else {
-      if (session.chinesebibles == null) {
-
-        session.chinesebibles = jswordService.getBiblesContainer().chinese.bibles
-        session.chinesebiblekeymap = jswordService.getBiblesContainer().chinese.biblekeymap
-      bibles = session.chinesebibles
-      biblekeymap = session.chinesebiblekeymap
-      }
-      bibles = session.chinesebibles
-      biblekeymap = session.chinesebiblekeymap
-
-    }
-   // println "version:" + params.version
-    def list = getPlainText(params.version, params.key, 200, session)
-    String text = ""
-    String previousbook = ""
-    int bk = 0
-    int cp = 0
-
-    list.each {
-
-      /* if (it.book == bk && it.chapter == cp) {
-      text += it.verse + " " + it.text
-    } else */
-      //{
-      bk = it.book
-      cp = it.chapter
-
-      text += "\r" + it.cbook?.trim() + "" + it.chapter + ":" + it.verse + " " + it.text
-
-      //}
-      if (text.length() > 70) {
-        Slide s1ide = ppt.createSlide();
-        createSlide(s1ide, text)
-        text = ""
-        cp = 0
-        bk = 0
-
-      }
-
-    }
-    if (text.length() > 2) {
-      Slide s1ide = ppt.createSlide();
-      createSlide(s1ide, text)
-    }
-    FileOutputStream out = new FileOutputStream(grailsApplication.config.docroot + "/" + session.id + ".ppt");
-    // File fl=new File(session.id + ".ppt")
-    // println fl.getAbsolutePath()
-    //FileOutputStream out = new FileOutputStream(fl);
-    ppt.write(out);
-    out.close();
-
-    //   println " session:" + session.id
-    Map map = new HashMap();
-    map.put("data", session.id + ".ppt")
-
-    render map as JSON
-  }
 
 
   def excl = {

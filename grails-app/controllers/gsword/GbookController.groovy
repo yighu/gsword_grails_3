@@ -27,12 +27,9 @@ import java.text.SimpleDateFormat;
 import org.crosswire.jsword.book.Defaults;
 import org.crosswire.bibledesktop.desktop.XSLTProperty
 import org.crosswire.jsword.versification.BibleNames
-import org.apache.poi.hslf.usermodel.SlideShow
-import org.apache.poi.hslf.model.Slide
-import org.apache.poi.hslf.model.TextBox
-import org.apache.poi.hslf.usermodel.RichTextRun
 import org.springframework.web.context.request.RequestContextHolder
 import javax.servlet.http.HttpSession;
+import org.gsword.ppt.PowerPoint;
 
 class GbookController {
   private static final String BIBLE_PROTOCOL = "bible";                                     //$NON-NLS-1$
@@ -715,73 +712,11 @@ chosen
     }
   }
 
-  private createSlide_oneText(Slide s1ide, String text) {
-  createSlide_oneText(s1ide, text,null) 
-	}
-  private createSlide_oneText(Slide s1ide, String text,String titletxt) {
-	if (titletxt){
-    	 TextBox title = s1ide.addTitle();
-    		title.setText(titletxt);
-	}
-    TextBox shape = new TextBox();
-    RichTextRun rt = shape.getTextRun().getRichTextRuns()[0];
-    // def ref = search(params.version, params.key)
-    //println " bibe:"+params.version +" key:"+params.key  +" ref:"+ref
 
-    /*   shape.setText(
-"January\r" +
-    "February\r" +
-    "March\r" +
-    "April");*/
-    shape.setText(text)
-    rt.setFontSize(42);
-
-    rt.setBullet(true);
-    rt.setBulletOffset(0);  //bullet offset
-    rt.setTextOffset(50);   //text offset (should be greater than bullet offset)
-//         rt.setBulletChar("\u263A"); //bullet character
-    s1ide.addShape(shape);
-
-    shape.setAnchor(new java.awt.Rectangle(50, 20, 650, 650));  //position of the text box in the slide
-    s1ide.addShape(shape);
-  }
-
-  private createSlide(Slide s1ide, String text) {
-  createSlide(s1ide, text,null,1) 
-	}
 	
-  private createSlide(Slide s1ide, String text, String titletxt,int rows) {
-	if(titletxt){
-     TextBox title = s1ide.addTitle();
-    title.setText(titletxt);
-}
-    TextBox shape = new TextBox();
-    RichTextRun rt = shape.getTextRun().getRichTextRuns()[0];
-    // def ref = search(params.version, params.key)
-    //println " bibe:"+params.version +" key:"+params.key  +" ref:"+ref
-
-    /*   shape.setText(
-"January\r" +
-    "February\r" +
-    "March\r" +
-    "April");*/
-    shape.setText(text)
-    int fontsize=42;
-   if (rows>1)fontsize =30
-   rt.setFontSize(fontsize);
-
-    rt.setBullet(true);
-    rt.setBulletOffset(0);  //bullet offset
-    rt.setTextOffset(20);   //text offset (should be greater than bullet offset)
-//         rt.setBulletChar("\u263A"); //bullet character
-    s1ide.addShape(shape);
-
-    shape.setAnchor(new java.awt.Rectangle(20, 150, 680, 680));  //position of the text box in the slide
-    s1ide.addShape(shape);
-  }
 
   def ppt = {
-    SlideShow ppt = new SlideShow();
+    PowerPoint ppt = new PowerPoint();
     if (params.version?.equals("KJV")) {
       if (session.englishbibles == null) {
           session.englishbibles = jswordService.getBiblesContainer().english.bibles
@@ -826,8 +761,7 @@ chosen
 
       //}
       if (text.length() > 70) {
-        Slide s1ide = ppt.createSlide();
-        createSlide(s1ide, text)
+        ppt.createSlide("", text)
         text = ""
         cp = 0
         bk = 0
@@ -836,28 +770,23 @@ chosen
 
     }
     if (text.length() > 2) {
-      Slide s1ide = ppt.createSlide();
-      createSlide(s1ide, text)
+        ppt.createSlide("", text)
     }
     try{
  	def currentDir = new File(".").getAbsolutePath() 
 	println("current dir:"+currentDir+"\n configured:"+grailsApplication.config.docroot)
-    FileOutputStream out = new FileOutputStream(grailsApplication.config.docroot + "/" + session.id + ".ppt");
-    // File fl=new File(session.id + ".ppt")
-    // println fl.getAbsolutePath()
-    //FileOutputStream out = new FileOutputStream(fl);
-    ppt.write(out);
-    out.close();
+    def file= grailsApplication.config.docroot + "/" + session.id + ".pptx";
+    ppt.save(file);
 	}catch (Exception e){
 	println "failed save:"+session.id
 	}
 
     Map map = new HashMap();
-    map.put("data", session.id + ".ppt")
+    map.put("data", session.id + ".pptx")
     render map as JSON
   }
   def pptparallel = {
-    SlideShow ppt = new SlideShow();
+    PowerPoint ppt = new PowerPoint();
     if (params.version?.equals("KJV")) {
       if (session.englishbibles == null) {
           session.englishbibles = jswordService.getBiblesContainer().english.bibles
@@ -888,26 +817,22 @@ def	lists=params.version.split(",").findAll{it?.trim()}.collect{getPlainText(it,
     def list = lists.head()
     def rest=lists.tail()
     list.each {
-        Slide s1ide = ppt.createSlide();
 	String nm=it.name
  	def txt=it.text.trim()
 	if(rest)txt +="\r"+reTriveText(nm,rest);
 				
-        createSlide(s1ide, txt,it.cbook?.trim() + "" + it.chapter + ":" + it.verse,lists.size())
+        ppt.createSlide(it.cbook?.trim() + "" + it.chapter + ":" + it.verse,txt)
     }
     try{
  	def currentDir = new File(".").getAbsolutePath() 
-	
-    def file=grailsApplication.config.docroot + "/" + session.id + ".ppt";
-    FileOutputStream out = new FileOutputStream(file);
-    ppt.write(out);
-    out.close();
+    def file=grailsApplication.config.docroot + "/" + session.id + "p.pptx";
+    ppt.save(file);
 	}catch (Exception e){
 	println "failed save:"+session.id
 	}
 
     Map map = new HashMap();
-    map.put("data", session.id + ".ppt")
+    map.put("data", session.id + "p.pptx")
     render map as JSON
   }
  def reTriveText= {name, rest->
