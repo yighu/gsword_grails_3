@@ -88,14 +88,14 @@ Download Mobile applications:
 <g:message code="introduction" />
 <!--
 <ul style="margin-bottom:0;">
-<li><a href="http://www.ccimweb.org/gsword/help/help.xhtml" title="Learn how to use www.ccimweb.org/gsword with a tutorial">Learn how to use www.ccimweb.org/gsword with a tutorial</a></li>
+<li><a href="http://www.gsword.org/help/help.xhtml" title="Learn how to use www.gsword.org/ with a tutorial">Learn how to use www.gsword.org with a tutorial</a></li>
 </ul>
 -->
 <div id="sig" class="txt-sm">
 <p>
 <!--
   <a href="http://www.facebook.com/group.php?gid=1714831533">GSword Facebook<img src="/gsword/images/ipcn-fb.png" width="55" height="25" alt="facebook" title="facebook" border="0"/></a><br/>
-  <a href="http://www.ccimweb.org/gsword/gbook/feed"><g:message code="feed"/><img border="0" src="/gsword/images/icon-rss.png" width="55" height="25" alt="rss" title="rss"/></a><br/>
+  <a href="http://www.gsword.org/gbook/feed"><g:message code="feed"/><img border="0" src="/gsword/images/icon-rss.png" width="55" height="25" alt="rss" title="rss"/></a><br/>
            <modalbox:createLink controller="gbook" action="contactus" title='Contact us/Feedback' width="400" linkname='Contact us/Feedback' /><br/>
 <a href="http://bible.ccim.org/" target="_blank"> <g:message code="oldtool" /></a><br/>
 -->

@@ -88,7 +88,7 @@
 
           </td>
       <td><a href="http://www.facebook.com/group.php?gid=1714831533"><img src="/images/ipcn-fb.png" width="55" height="25" alt="facebook" title="facebook" border="0" /></a></td>
-      <td><a href="http://www.ccimweb.org/gbook/feed"><img border="0" src="/images/icon-rss.png" width="55" height="25" alt="rss" title="rss" /></a></td>
+      <td><a href="http://www.gsword.org/gbook/feed"><img border="0" src="/images/icon-rss.png" width="55" height="25" alt="rss" title="rss" /></a></td>
       <td><a href="http://www.twitter.com/gsword"><img border="0" src="/images/icon-twitter.png" width="55" height="25" alt="twitter" title="twitter" /></a></td>
       
 

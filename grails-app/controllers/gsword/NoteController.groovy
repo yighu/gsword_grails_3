@@ -18,7 +18,7 @@ class NoteController {
 	render result as JSON	
 	}
     def emailnote(){
-	def ORIGIN="\nGSword Online Bible Studio http://www.ccimweb.org/gsword\n"
+	def ORIGIN="\nGSword Online Bible Studio http://www.gsword.org\n"
 	def msg="The note is emailed successfully."
 	def address=request.remoteHost
 try{

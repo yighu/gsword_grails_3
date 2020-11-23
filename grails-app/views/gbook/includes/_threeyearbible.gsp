@@ -1,7 +1,6 @@
 <g:javascript library="application" />
 <center>
 
-<br/>
 
             <g:message code="threeyearbible" />:
 			<g:select name="dailyword" class ="books" noSelection="['':'']"

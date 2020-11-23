@@ -120,7 +120,7 @@ Download Mobile applications:
 <g:message code="introduction" />
 <!--
 <ul style="margin-bottom:0;">
-<li><a href="http://www.ccimweb.org/gsword/help/help.xhtml" title="Learn how to use www.ccimweb.org/gsword with a tutorial">Learn how to use www.ccimweb.org/gsword with a tutorial</a></li>
+<li><a href="http://www.gsword.org/help/help.xhtml" title="Learn how to use www.gsword.org with a tutorial">Learn how to use www.gsword.org with a tutorial</a></li>
 </ul>
 -->
 <div id="sig" class="txt-sm">

@@ -21,7 +21,7 @@ environments {
         grails.logging.jul.usebridge = false
 
         // TODO: grails.serverURL = "http://www.changeme.com"
-        grails.serverURL = "http://www.ccimweb.org/gsword"
+        grails.serverURL = "http://www.gsword.org"
         docroot="/home/tomcat/apache-tomcat/webapps/ROOT/WEB-INF/classes/public/ppt"
         membibleid="/home/tomcat/membible/lastid.txt"
         membiblesch="/home/tomcat/membible/membiblesch.txt"

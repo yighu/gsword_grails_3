@@ -818,7 +818,7 @@ def	lists=params.version.split(",").findAll{it?.trim()}.collect{getPlainText(it,
     def rest=lists.tail()
     list.each {
 	String nm=it.name
- 	def txt=it.text.trim()
+ 	def txt=it.text?.trim()
 	if(rest)txt +="\r"+reTriveText(nm,rest);
 				
         ppt.createSlide(it.cbook?.trim() + "" + it.chapter + ":" + it.verse,txt)
@@ -841,7 +841,7 @@ def	lists=params.version.split(",").findAll{it?.trim()}.collect{getPlainText(it,
 };
   def reTriveTextFromOneBook={name,book->
 		def tt=book.find{it.name==name}
-		tt.text?.trim()
+		tt?.text?.trim()
 		
   }
   def memv={
