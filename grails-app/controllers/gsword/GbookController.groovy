@@ -772,17 +772,18 @@ chosen
     if (text.length() > 2) {
         ppt.createSlide("", text)
     }
+	String filename=(params.version.replace(",","_").trim()+"_"+params.key.trim().replace(" ","_")).replace(",","_");
     try{
  	def currentDir = new File(".").getAbsolutePath() 
 	println("current dir:"+currentDir+"\n configured:"+grailsApplication.config.docroot)
-    def file= grailsApplication.config.docroot + "/" + session.id + ".pptx";
+    def file= grailsApplication.config.docroot + "/" + filename+ ".pptx";
     ppt.save(file);
 	}catch (Exception e){
-	println "failed save:"+session.id
+	println "failed save:"+filename
 	}
 
     Map map = new HashMap();
-    map.put("data", session.id + ".pptx")
+    map.put("data", filename+ ".pptx")
     render map as JSON
   }
   def pptparallel = {
@@ -823,18 +824,81 @@ def	lists=params.version.split(",").findAll{it?.trim()}.collect{getPlainText(it,
 				
         ppt.createSlide(it.cbook?.trim() + "" + it.chapter + ":" + it.verse,txt)
     }
+	String filename=(params.version.replace(",","_").trim()+"_"+params.key.trim().replace(" ","_")).replace(",","_");
+	print("file name:"+filename)
     try{
  	def currentDir = new File(".").getAbsolutePath() 
-    def file=grailsApplication.config.docroot + "/" + session.id + "p.pptx";
+    def file=grailsApplication.config.docroot + "/" + filename + "p.pptx";
     ppt.save(file);
 	}catch (Exception e){
 	println "failed save:"+session.id
 	}
 
     Map map = new HashMap();
-    map.put("data", session.id + "p.pptx")
+    map.put("data", filename+ "p.pptx")
     render map as JSON
   }
+  def downloadFile= {
+    PowerPoint ppt = new PowerPoint();
+    if (params.version?.equals("KJV")) {
+      if (session.englishbibles == null) {
+          session.englishbibles = jswordService.getBiblesContainer().english.bibles
+          session.englishbiblekeymap = jswordService.getBiblesContainer().english.biblekeymap
+          bibles = session.englishbibles
+          biblekeymap = session.englishbiblekeymap
+      }
+      bibles = session.englishbibles
+      biblekeymap = session.englishbiblekeymap
+
+    } else {
+      if (session.chinesebibles == null) {
+
+          session.chinesebibles = jswordService.getBiblesContainer().chinese.bibles
+          session.chinesebiblekeymap = jswordService.getBiblesContainer().chinese.biblekeymap
+
+          bibles = session.chinesebibles
+          biblekeymap = session.chinesebiblekeymap
+
+      }
+      bibles = session.chinesebibles
+      biblekeymap = session.chinesebiblekeymap
+
+    }
+	def version=params.version.replace(",,",",")
+       println "parallel version:" + version
+def	lists=params.version.split(",").findAll{it?.trim()}.collect{getPlainText(it, params.key, 200, session)}
+    def list = lists.head()
+    def rest=lists.tail()
+    list.each {
+	String nm=it.name
+ 	def txt=it.text?.trim()
+	if(rest)txt +="\r"+reTriveText(nm,rest);
+				
+        ppt.createSlide(it.cbook?.trim() + "" + it.chapter + ":" + it.verse,txt)
+    }
+	def file="xx.ppt";
+	String filename=(params.version.replace(",","_").trim()+"_"+params.key.trim().replace(" ","_")).replace(",","_");
+    try{
+ 	def currentDir = new File(".").getAbsolutePath() 
+    file=grailsApplication.config.docroot + "/" + filename + "p.pptx";
+    ppt.save(file);
+	}catch (Exception e){
+	println "failed save:"+filename
+	}
+
+    Map map = new HashMap();
+    map.put("data", filename+ "p.pptx")
+    //render map as JSON
+	println("download....")
+response.setContentType("application/octet-stream")
+   response.setHeader("Content-disposition", "filename=gsword.pptx")
+def outputStream = response.getOutputStream()
+                outputStream << file.bytes
+                outputStream.flush()
+	println("download....down")
+                outputStream.close()
+  }
+
  def reTriveText= {name, rest->
     rest.collect{reTriveTextFromOneBook(name,it)}?.join("\r")
 

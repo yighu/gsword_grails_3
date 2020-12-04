@@ -555,7 +555,7 @@ function generatePPT(){
 	}else if (ppt=='parallel'){
 		genpptparallel();
 	}else{
-		// no choise
+		download();
 	}
 	}
 function genppt(){
@@ -572,6 +572,38 @@ $.ajax({
   });
 }
 
+function download(){
+    var bible=getBook()+","+ parallelbooks;
+    setInfo("Please wait generating PowerPoint.....<button>download</button>")  ;
+	console.log(' download ppt:');
+    var reference=$('#reference').val();
+$.ajax({
+  type: "POST",
+  url: ctx()+"downloadFile",
+  data: { version: bible,key:reference}
+})
+  .done(function( msg ) {
+	console.log('got msg');
+	console.log(msg);
+    openwin(msg);
+var url = URL.createObjectURL(msg);
+        var $a = $('<a />', {
+          'href': url,
+          'download': 'gsword.pptx',
+          'text': "click"
+        }).hide().appendTo($('#info'))[0].click();
+  })
+  .success(function( msg ) {
+	console.log('success got msg');
+	console.log(msg);
+var url = URL.createObjectURL(msg);
+        var $a = $('<a />', {
+          'href': url,
+          'download': 'gsword.pptx',
+          'text': "click"
+        }).hide().appendTo($('#info'))[0].click();
+  });
+}
 function genpptparallel(){
     var bible=getBook()+","+ parallelbooks;
     setInfo("Please wait generating parallel PowerPoint for ....."+bible)  ;
