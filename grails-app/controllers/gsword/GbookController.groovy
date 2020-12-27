@@ -43,6 +43,7 @@ class GbookController {
   private static final String NOTES= "Notes"; //$NON-NLS-1$
   private static final String HEADINGS= "Headings"; //$NON-NLS-1$
   private static final String XREF= "XRef"; //$NON-NLS-1$
+  private static final int flen=30
   def     rootlink = "http://www.gsword.org/gbook/"
   def jswordService
   def languageService
@@ -773,6 +774,7 @@ chosen
         ppt.createSlide("", text)
     }
 	String filename=(params.version.replace(",","_").trim()+"_"+params.key.trim().replace(" ","_")).replace(",","_");
+	if (filename.length()>flen)filename=filename.substring(0,flen);
     try{
  	def currentDir = new File(".").getAbsolutePath() 
 	println("current dir:"+currentDir+"\n configured:"+grailsApplication.config.docroot)
@@ -825,6 +827,7 @@ def	lists=params.version.split(",").findAll{it?.trim()}.collect{getPlainText(it,
         ppt.createSlide(it.cbook?.trim() + "" + it.chapter + ":" + it.verse,txt)
     }
 	String filename=(params.version.replace(",","_").trim()+"_"+params.key.trim().replace(" ","_")).replace(",","_");
+	if (filename.length()>flen)filename=filename.substring(0,flen);
 	print("file name:"+filename)
     try{
  	def currentDir = new File(".").getAbsolutePath() 
@@ -878,6 +881,7 @@ def	lists=params.version.split(",").findAll{it?.trim()}.collect{getPlainText(it,
     }
 	def file="xx.ppt";
 	String filename=(params.version.replace(",","_").trim()+"_"+params.key.trim().replace(" ","_")).replace(",","_");
+	if (filename.length()>flen)filename=filename.substring(0,flen);
     try{
  	def currentDir = new File(".").getAbsolutePath() 
     file=grailsApplication.config.docroot + "/" + filename + "p.pptx";
